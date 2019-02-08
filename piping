@@ -1,0 +1,24 @@
+#!/bin/bash
+
+BASE_DIR=/tmp/.piping
+mkdir -p "$BASE_DIR"
+
+PIPE_NAME="$1"
+
+if [ "$PIPE_NAME" = "" ]
+then
+  PIPE_NAME="$(mktemp "$BASE_DIR/XXXXX")"
+  rm -f "$PIPE_NAME"
+  PIPE_NAME="$(basename "$PIPE_NAME")"
+  echo "A pipeline is prepared as \"$PIPE_NAME\"" >&2
+fi
+
+PIPE_PATH="$BASE_DIR/$PIPE_NAME"
+
+if [ -p "$PIPE_PATH" ] # reading mode
+then
+  cat "$PIPE_PATH" && rm "$PIPE_PATH"
+else # writing mode
+  mkfifo "$PIPE_PATH" || exit 1
+  cat > "$PIPE_PATH"
+fi
