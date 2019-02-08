@@ -24,7 +24,7 @@ On a sender host, you may give any data to your relay server via a pipeline, as:
 user@sender-host:~$ seq 1 3 | ssh user@my-ssh-server piping seq
 ```
 
-On this case, `piping` is the command name and the argument `seq` is the name of the pipeline. If there is no existing pipeline with the name, `piping` starts in the writing mode. Othwrwise the command starts in the reading mode for a receiver. Ths, on a receiver host, you may receive any data from your relay server via a pipeline, as:
+On this case, `piping` is the command name and the argument `seq` is the name of the pipeline. If there is no existing pipeline with the name, `piping` starts in the writing mode. Otherwise the command starts in the reading mode for a receiver. Ths, on a receiver host, you may receive any data from your relay server via a pipeline, as:
 
 ```console
 user@receiver-host:~$ ssh user@my-ssh-server piping seq
